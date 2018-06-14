@@ -47,16 +47,16 @@ Sketch = {
           function(i, cell) {
             cell.wall = false;
             cell.goal = false;
-            cell.html
-              .stop(true)
-              .animate(
-                {'background-color': '#000000'},
-                1000
-              );
           }
         )
       }
     );
+    $('.cell')
+    .stop(true)
+      .animate(
+        {'background-color': '#000000'},
+        1000
+      );
     Sketch.set_score(0);
     Sketch.set_lives(5);
   },
