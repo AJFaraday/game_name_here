@@ -2,10 +2,10 @@ Sketch = {
 
   init_to_fill_window: function() {
     var height = $(window).height() - 100;
-    var width = $(window).width() - 140;
+    var width = $(window).width() - 40;
     Sketch.init(
-      Math.floor(width / 20),
-      Math.floor(height / 20)
+      Math.floor(width / 22),
+      Math.floor(height / 22)
     )
   },
 
