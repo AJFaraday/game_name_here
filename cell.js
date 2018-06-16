@@ -35,7 +35,7 @@ function Cell(col, row) {
       if(cell.goal) {
         Sketch.increase_score();
         Sketch.goal_manager.random_goal();
-        Sketch.wall_manager.random_walls(Sketch.blue_suqare_value());
+        Sketch.wall_manager.random_walls(Sketch.blue_square_value());
         cell.goal = false;
         Sketch.set_message(
           "Mmmmm, lovely blue squares!"
