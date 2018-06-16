@@ -38,6 +38,7 @@ Sketch = {
     Sketch.goal_manager = new GoalManager(cols, rows);
     Sketch.set_lives(5);
     Sketch.set_score(0);
+    Sketch.current_hundred = 0;
   },
 
   resize_space: function() {
@@ -67,6 +68,7 @@ Sketch = {
       );
     Sketch.set_score(0);
     Sketch.set_lives(5);
+    Sketch.current_hundred = 0;
   },
 
   set_message: function(mess) {
@@ -80,6 +82,10 @@ Sketch = {
 
   increase_score: function() {
     Sketch.set_score(Sketch.points + Sketch.blue_square_value());
+    while(Math.floor(Sketch.points/100) > Sketch.current_hundred) {
+      Sketch.set_lives(Sketch.lives + 1);
+      Sketch.current_hundred++;
+    }
   },
 
 
@@ -89,17 +95,20 @@ Sketch = {
     if(Sketch.lives <= 0) {
       Sketch.end_game();
     }
-  },
+  }
+  ,
 
   end_game: function() {
     Sketch.set_message('Oh noes! You lost! Your score was ' + Sketch.points + '. Click to try again.');
     Sketch.clear_board();
     Sketch.game_active = false;
-  },
+  }
+  ,
 
   lose_life: function() {
     Sketch.set_lives(Sketch.lives - 1);
-  },
+  }
+  ,
 
   start_game: function() {
     if(Sketch.game_active == false) {
@@ -108,7 +117,8 @@ Sketch = {
       Sketch.set_score(0);
       Sketch.goal_manager.random_goal();
     }
-  },
+  }
+  ,
 
   initial_draw: function() {
     $.each(
@@ -123,7 +133,8 @@ Sketch = {
         Sketch.space.append($('<br clear="both"/>'));
       }
     );
-  },
+  }
+  ,
 
   init_mouse: function() {
     Sketch.space.on('click', function() {
@@ -133,17 +144,19 @@ Sketch = {
       'mouseleave',
       function() {
         if(Sketch.game_active) {
-          Sketch.lose_life();
           Sketch.set_message(
             "Don't leave the play area! You lose a life!"
-          )
+          );
+          Sketch.lose_life();
         }
       }
     );
-  },
+  }
+  ,
 
   // Both the score increase and the number of walls
   blue_square_value: function() {
     return Math.floor(Sketch.points / 10) + 1
   }
-};
+}
+;

@@ -12,7 +12,6 @@ WallManager = function(rows, cols) {
 
   this.random_walls = function(n) {
     for(var i = 0; i < n; i++) {
-      console.log(i)
       manager.random_wall();
     }
   };
