@@ -10,8 +10,8 @@ Sketch = {
   },
 
   init: function(cols, rows) {
-    Sketch.rows = rows;
-    Sketch.cols = cols;
+    Sketch.height = rows;
+    Sketch.width = cols;
     Sketch.space = $('#sketch');
     Sketch.rows = [];
     for(var row = 0; row < rows; row++) {
@@ -25,7 +25,6 @@ Sketch = {
     }
     Sketch.initial_draw();
     Sketch.resize_space();
-    Sketch.init_mouse();
 
     Sketch.game_active = false;
 
@@ -59,13 +58,11 @@ Sketch = {
         )
       }
     );
-    $('.cell')
-      .removeClass('wall')
-      .removeClass('snake')
-      .removeClass('goal')
+    $('.cell').removeClass('wall').removeClass('snake').removeClass('goal');
     Sketch.set_score(0);
     Sketch.set_lives(5);
     Sketch.current_hundred = 0;
+    if(typeof API !== 'undefined') {API.walls = [];}
   },
 
   set_message: function(mess) {
@@ -79,12 +76,11 @@ Sketch = {
 
   increase_score: function() {
     Sketch.set_score(Sketch.points + Sketch.blue_square_value());
-    while(Math.floor(Sketch.points/100) > Sketch.current_hundred) {
+    while(Math.floor(Sketch.points / 100) > Sketch.current_hundred) {
       Sketch.set_lives(Sketch.lives + 1);
       Sketch.current_hundred++;
     }
   },
-
 
   set_lives: function(lives) {
     Sketch.lives = lives;
@@ -92,20 +88,17 @@ Sketch = {
     if(Sketch.lives <= 0) {
       Sketch.end_game();
     }
-  }
-  ,
+  },
 
   end_game: function() {
     Sketch.set_message('Oh noes! You lost! Your score was ' + Sketch.points + '. Click to try again.');
     Sketch.clear_board();
     Sketch.game_active = false;
-  }
-  ,
+  },
 
   lose_life: function() {
     Sketch.set_lives(Sketch.lives - 1);
-  }
-  ,
+  },
 
   start_game: function() {
     if(Sketch.game_active == false) {
@@ -114,8 +107,7 @@ Sketch = {
       Sketch.set_score(0);
       Sketch.goal_manager.random_goal();
     }
-  }
-  ,
+  },
 
   initial_draw: function() {
     $.each(
@@ -130,8 +122,7 @@ Sketch = {
         Sketch.space.append($('<br clear="both"/>'));
       }
     );
-  }
-  ,
+  },
 
   init_mouse: function() {
     Sketch.space.on('click', function() {
@@ -148,8 +139,16 @@ Sketch = {
         }
       }
     );
-  }
-  ,
+    $.each(Sketch.rows, function(i, r) {
+      $.each(r, function(i, c) {
+        c.init_mouse();
+      });
+    });
+  },
+
+  init_api: function() {
+    API.init();
+  },
 
   // Both the score increase and the number of walls
   blue_square_value: function() {

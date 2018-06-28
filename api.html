@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+    <script src="cell.js"></script>
+    <script src="goal_manager.js"></script>
+    <script src="wall_manager.js"></script>
+    <script src="api.js"></script>
+    <script src="sketch.js"></script>
+    <script src="editor.js"></script>
+    <link rel="stylesheet" type="text/css" href="sketch.css">
+    <link rel="stylesheet" type="text/css" href="api.css">
+  </head>
+  <body>
+    <div id="score">0</div>
+    <div id="lives">5</div>
+    <div id="message">Welcome to [game name here] API Edition</div>
+    <br clear="both"/>
+    <div id="sketch" style="float:left;padding:10px;"></div>
+    <div class="api_doc" style="float:left;">
+      <h3>Allowed methods:</h3>
+      <dl>
+        <b>API.coord</b>: The location of the green snake.
+        <br/>
+        Returns: [1, 2]
+        <br/>
+        <b>API.goal</b>: The location of the blue goal square.
+        <br/>
+        Returns: [4, 7]
+        <br/>
+        <b>API.walls</b>: The location of the red wall squares.
+        <br/>
+        Returns: [[5, 5], [8, 9]]
+        <br/>
+        <b>API.neighbours</b>: Descriptions of all the adjacent squares.
+        <br/>
+        Returns: {up: 'blank', right: 'edge', down: 'wall', left: 'goal'}
+        <br/>
+        <b>API.up()</b>: Move the green snake up
+        <br/>
+        <b>API.right()</b>: Move the green snake right
+        <br/>
+        <b>API.down()</b>: Move the green snake down
+        <br/>
+        <b>API.left()</b>: Move the green snake left
+      </dl>
+      <h3>Your function:</h3>
+      <textarea id="custom_function"></textarea>
+      <br clear="both"/>
+      <a class=button id="step">Step</a>
+      <a class=button id="slow">Run (slow)</a>
+      <a class=button id="fast">Run (fast)</a>
+      <a class=button id="stop">Stop</a>
+      <a class="button red" id="reset">Reset</a>
+    </div>
+    <script type="text/javascript">
+      Sketch.init(30, 25);
+      Sketch.init_api();
+      Editor.init();
+    </script>
+  </body>
+</html>

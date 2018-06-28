@@ -1,4 +1,6 @@
 function Cell(col, row) {
+  this.row = row;
+  this.col = col;
   this.html = $('<div>').addClass('cell');
   this.goal = false;
 
@@ -7,12 +9,14 @@ function Cell(col, row) {
     this.wall = false;
     this.goal = true;
     this.html.addClass('goal');
+    if(typeof API !== 'undefined') {API.set_goal(col, row);}
   };
 
   this.is_wall = function() {
     if(this.goal == false) {
       this.wall = true;
       this.html.addClass('wall');
+      if(typeof API !== 'undefined') {API.add_wall(col, row);}
     }
   };
 
@@ -28,6 +32,7 @@ function Cell(col, row) {
       );
     }
     if(cell.wall) {
+      if(typeof API !== 'undefined') {API.remove_wall(col, row);}
       cell.wall = false;
       cell.html.removeClass('wall');
       Sketch.set_message(
@@ -38,16 +43,13 @@ function Cell(col, row) {
     cell.html.addClass('snake');
   };
 
-
-  this.html.on('mouseenter', cell.visit);
-
   this.leave = function() {
-    cell.html
-      .removeClass('snake')
+    cell.html.removeClass('snake');
   };
 
-  this.html.on('mouseleave', cell.leave);
-
-
+  this.init_mouse = function() {
+    this.html.on('mouseleave', cell.leave);
+    this.html.on('mouseenter', cell.visit);
+  };
 
 }
