@@ -25,7 +25,6 @@ Sketch = {
     }
     Sketch.initial_draw();
     Sketch.resize_space();
-    // TODO allow other control systems
     Sketch.init_mouse();
 
     Sketch.game_active = false;
@@ -61,11 +60,9 @@ Sketch = {
       }
     );
     $('.cell')
-      .stop(true)
-      .animate(
-        {'background-color': '#000000'},
-        1000
-      );
+      .removeClass('wall')
+      .removeClass('snake')
+      .removeClass('goal')
     Sketch.set_score(0);
     Sketch.set_lives(5);
     Sketch.current_hundred = 0;
