@@ -29,11 +29,20 @@ API = {
   },
 
   set_goal: function(x, y) {
+    API.remove_wall(x, y);
     API.goal = [x, y];
   },
 
   add_wall: function(x, y) {
-    API.walls.push([x, y]);
+    var is_goal = false;
+    for(var k = 0; k < API.walls.length; k++) {
+      if(API.walls[k][0] == x && API.walls[k][1] == y) {
+        is_goal = true
+      }
+    }
+    if(is_goal == false) {
+      API.walls.push([x, y]);
+    }
   },
 
   remove_wall: function(x, y) {
