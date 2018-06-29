@@ -21,8 +21,8 @@ Timeout = {
         $('#timeout').html("Timeout: " + time_left);
       } else {
         Timeout.last_mark = Date.now();
-        Sketch.lose_life();
         Sketch.set_message("20 seconds since your last blue square. OUCH!")
+        Sketch.lose_life();
       }
     }
   }
