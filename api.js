@@ -72,7 +72,8 @@ API = {
   up: function() {
     var target = API.get_cell(API.coord[0], API.coord[1] - 1);
     if(target != null) {
-      API.current_cell().leave();
+      var this_cell = API.current_cell();
+      setTimeout(function() {this_cell.leave()}, 10);
       API.coord[1] -= 1;
       API.current_cell().visit();
     } else {
@@ -83,7 +84,8 @@ API = {
   down: function() {
     var target = API.get_cell(API.coord[0], API.coord[1] + 1);
     if(target != null) {
-      API.current_cell().leave();
+      var this_cell = API.current_cell();
+      setTimeout(function() {this_cell.leave()}, 10);
       API.coord[1] += 1;
       API.current_cell().visit();
     } else {
@@ -94,7 +96,8 @@ API = {
   left: function() {
     var target = API.get_cell(API.coord[0] - 1, API.coord[1]);
     if(target != null) {
-      API.current_cell().leave();
+      var this_cell = API.current_cell();
+      setTimeout(function() {this_cell.leave()}, 10);
       API.coord[0] -= 1;
       API.current_cell().visit();
     } else {
@@ -105,7 +108,8 @@ API = {
   right: function() {
     var target = API.get_cell(API.coord[0] + 1, API.coord[1]);
     if(target != null) {
-      API.current_cell().leave();
+      var this_cell = API.current_cell();
+      setTimeout(function() {this_cell.leave()}, 10);
       API.coord[0] += 1;
       API.current_cell().visit();
     } else {

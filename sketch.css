@@ -54,6 +54,6 @@
 }
 
 .cell.snake {
-  background-color: #00ff00;
   transition: 0s background-color;
+  background-color: #00ff00;
 }
