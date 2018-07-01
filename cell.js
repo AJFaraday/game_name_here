@@ -8,7 +8,7 @@ function Cell(col, row) {
   this.is_goal = function() {
     this.wall = false;
     this.goal = true;
-    this.html.addClass('goal');
+    this.html.addClass('goal').removeClass('wall');
     if(typeof API !== 'undefined') {API.set_goal(col, row);}
   };
 
